@@ -1,7 +1,7 @@
-package mumbler.graal.node;
+package mumbler.graal.fromsimple.node;
 
-import mumbler.graal.Function;
-import mumbler.graal.env.Environment;
+import mumbler.graal.fromsimple.Function;
+import mumbler.graal.fromsimple.env.Environment;
 
 public abstract class SpecialForm extends Node {
     private static class DefineSpecialForm extends SpecialForm {

@@ -1,6 +1,6 @@
-package mumbler.graal;
+package mumbler.graal.fromsimple;
 
-import mumbler.graal.env.Environment;
+import mumbler.graal.fromsimple.env.Environment;
 
 public abstract class Function implements Evaluatable {
     @Override

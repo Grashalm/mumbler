@@ -1,7 +1,7 @@
-package mumbler.graal.env;
+package mumbler.graal.fromsimple.env;
 
-import mumbler.graal.Function;
-import mumbler.graal.node.MumblerListNode;
+import mumbler.graal.fromsimple.Function;
+import mumbler.graal.fromsimple.node.MumblerListNode;
 
 abstract class BuiltinFn extends Function {
     static final Function EQUALS = new BuiltinFn("EQUALS") {

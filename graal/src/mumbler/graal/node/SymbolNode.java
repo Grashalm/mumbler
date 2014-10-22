@@ -1,32 +1,20 @@
 package mumbler.graal.node;
 
-import mumbler.graal.env.Environment;
+import com.oracle.truffle.api.frame.FrameSlot;
+import com.oracle.truffle.api.frame.VirtualFrame;
 
-public class SymbolNode extends Node {
-    public final String name;
+public class SymbolNode extends MumblerNode {
+    private final FrameSlot slot;
 
-    public SymbolNode(String name) {
-        this.name = name;
+    public SymbolNode(FrameSlot slot) {
+        this.slot = slot;
     }
 
-    @Override
-    public String toString() {
-        return "'" + this.name;
-    }
+
+
 
     @Override
-    public boolean equals(Object other) {
-        return other instanceof SymbolNode &&
-                this.name.equals(((SymbolNode) other).name);
-    }
-
-    @Override
-    public int hashCode() {
-        return this.name.hashCode();
-    }
-
-    @Override
-    public Object eval(Environment env) {
-        return env.getValue(this.name);
+    public Object execute(VirtualFrame virtualFrame) {
+        return virtualFrame.getValue(this.slot);
     }
 }

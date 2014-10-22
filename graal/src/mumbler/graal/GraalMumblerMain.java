@@ -5,9 +5,10 @@ import java.io.Console;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import mumbler.graal.env.Environment;
-import mumbler.graal.node.MumblerListNode;
-import mumbler.graal.node.Node;
+import mumbler.graal.fromsimple.Reader;
+import mumbler.graal.fromsimple.env.Environment;
+import mumbler.graal.fromsimple.node.MumblerListNode;
+import mumbler.graal.fromsimple.node.Node;
 
 public class GraalMumblerMain {
     public static void main(String[] args) throws IOException {

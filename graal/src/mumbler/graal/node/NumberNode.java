@@ -1,8 +1,10 @@
 package mumbler.graal.node;
 
-import mumbler.graal.env.Environment;
+import com.oracle.truffle.api.frame.VirtualFrame;
 
-public class NumberNode extends Node {
+// TODO: Add @NodeInfo
+public class NumberNode extends MumblerNode {
+
     private final long num;
 
     public NumberNode(long num) {
@@ -10,18 +12,12 @@ public class NumberNode extends Node {
     }
 
     @Override
-    public String toString() {
-        return Long.toString(this.num);
+    public Object execute(VirtualFrame virtualFrame) {
+        return this.num;
     }
 
     @Override
-    public boolean equals(Object other) {
-        return other instanceof NumberNode &&
-            this.num == ((NumberNode) other).num;
-    }
-
-    @Override
-    public Object eval(Environment env) {
-        return new Long(this.num);
+    public long executeLong(VirtualFrame virtualFrame) {
+        return this.num;
     }
 }

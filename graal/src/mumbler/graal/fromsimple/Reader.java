@@ -1,4 +1,4 @@
-package mumbler.graal;
+package mumbler.graal.fromsimple;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -8,12 +8,12 @@ import java.io.PushbackReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import mumbler.graal.node.BooleanNode;
-import mumbler.graal.node.Node;
-import mumbler.graal.node.NumberNode;
-import mumbler.graal.node.SpecialForm;
-import mumbler.graal.node.SymbolNode;
-import mumbler.graal.node.MumblerListNode;
+import mumbler.graal.fromsimple.node.BooleanNode;
+import mumbler.graal.fromsimple.node.MumblerListNode;
+import mumbler.graal.fromsimple.node.Node;
+import mumbler.graal.fromsimple.node.NumberNode;
+import mumbler.graal.fromsimple.node.SpecialForm;
+import mumbler.graal.fromsimple.node.SymbolNode;
 
 public class Reader {
     public static MumblerListNode<Node> read(InputStream istream) throws IOException {
