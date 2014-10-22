@@ -18,10 +18,10 @@ public abstract class MumblerNode extends Node {
 
     public abstract Object execute(VirtualFrame virtualFrame);
 
-    public long executeLong(VirtualFrame virtualFame)
+    public long executeLong(VirtualFrame virtualFrame)
             throws UnexpectedResultException {
         return MumblerTypesGen.MUMBLERTYPES.expectLong(
-                this.execute(virtualFame));
+                this.execute(virtualFrame));
     }
 
     public boolean executeBoolean(VirtualFrame virtualFrame)
