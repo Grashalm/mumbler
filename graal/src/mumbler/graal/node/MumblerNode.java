@@ -3,6 +3,7 @@ package mumbler.graal.node;
 import mumbler.graal.MumblerTypes;
 import mumbler.graal.MumblerTypesGen;
 import mumbler.graal.type.MumblerFunction;
+import mumbler.graal.type.MumblerList;
 import mumbler.graal.type.MumblerNull;
 import mumbler.graal.type.MumblerSymbol;
 
@@ -45,6 +46,12 @@ public abstract class MumblerNode extends Node {
     public MumblerNull executeMumblerNull(VirtualFrame virtualFrame)
             throws UnexpectedResultException {
         return MumblerTypesGen.MUMBLERTYPES.expectMumblerNull(
+                this.execute(virtualFrame));
+    }
+
+    public MumblerList executeMumblerList(VirtualFrame virtualFrame)
+            throws UnexpectedResultException {
+        return MumblerTypesGen.MUMBLERTYPES.expectMumblerList(
                 this.execute(virtualFrame));
     }
 }

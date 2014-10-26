@@ -1,4 +1,6 @@
-package mumbler.graal.node;
+package mumbler.graal.node.literal;
+
+import mumbler.graal.node.MumblerNode;
 
 import com.oracle.truffle.api.frame.VirtualFrame;
 
