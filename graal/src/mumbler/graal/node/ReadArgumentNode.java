@@ -1,7 +1,5 @@
 package mumbler.graal.node;
 
-import mumbler.graal.type.MumblerNull;
-
 import com.oracle.truffle.api.frame.VirtualFrame;
 
 public class ReadArgumentNode extends MumblerNode {
@@ -17,6 +15,7 @@ public class ReadArgumentNode extends MumblerNode {
         if (this.index < args.length) {
             return args[this.index];
         }
-        return MumblerNull.EMPTY;
+        throw new IllegalArgumentException("Function needs argument number "
+                + this.index);
     }
 }

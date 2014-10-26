@@ -10,7 +10,7 @@ import com.oracle.truffle.api.nodes.ExplodeLoop;
 public class LambdaNode extends MumblerNode {
     @Children private final MumblerNode[] bodyNodes;
 
-    public LambdaNode(MumblerNode[] bodyNodes) {
+    private LambdaNode(MumblerNode[] bodyNodes) {
         this.bodyNodes = bodyNodes;
     }
 
