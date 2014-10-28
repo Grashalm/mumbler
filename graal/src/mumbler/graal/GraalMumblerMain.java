@@ -4,11 +4,16 @@ import java.io.ByteArrayInputStream;
 import java.io.Console;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 
-import mumbler.graal.fromsimple.Reader;
-import mumbler.graal.fromsimple.env.Environment;
 import mumbler.graal.fromsimple.node.MumblerListNode;
-import mumbler.graal.fromsimple.node.Node;
+import mumbler.graal.node.MumblerNode;
+import mumbler.graal.node.MumblerRootNode;
+
+import com.oracle.truffle.api.Truffle;
+import com.oracle.truffle.api.frame.FrameDescriptor;
+import com.oracle.truffle.api.frame.FrameSlot;
+import com.oracle.truffle.api.frame.VirtualFrame;
 
 public class GraalMumblerMain {
     public static void main(String[] args) throws IOException {
@@ -21,7 +26,9 @@ public class GraalMumblerMain {
     }
 
     private static void startREPL() throws IOException {
-        Environment topEnv = Environment.getBaseEnvironment();
+        FrameDescriptor frameDescriptor = new FrameDescriptor();
+        VirtualFrame virtualFrame = Truffle.getRuntime().createVirtualFrame(
+                new Object[] {}, frameDescriptor);
 
         Console console = System.console();
         while (true) {
@@ -31,12 +38,13 @@ public class GraalMumblerMain {
                 // EOF sent
                 break;
             }
-            MumblerListNode<Node> nodes = Reader.read(new ByteArrayInputStream(data.getBytes()));
+            List<MumblerNode> nodes =
+                    Reader.read(new ByteArrayInputStream(data.getBytes()));
 
             // EVAL
             Object result = MumblerListNode.EMPTY;
-            for (Node node : nodes) {
-                result = node.eval(topEnv);
+            for (MumblerNode node : nodes) {
+                result = node.execute(virtualFrame);
             }
 
             // PRINT
@@ -47,11 +55,10 @@ public class GraalMumblerMain {
     }
 
     private static void runMumbler(String filename) throws IOException {
-        Environment topEnv = Environment.getBaseEnvironment();
-
-        MumblerListNode<Node> nodes = Reader.read(new FileInputStream(filename));
-        for (Node node : nodes) {
-            node.eval(topEnv);
-        }
+        List<MumblerNode> nodes = Reader.read(new FileInputStream(filename));
+        FrameDescriptor frameDescriptor = Reader.frameDesriptors.pop();
+        MumblerRootNode root = MumblerRootNode.lambda(new FrameSlot[] {},
+                nodes.toArray(new MumblerNode[] {}), frameDescriptor);
+        root.getCallTarget().call();
     }
 }
