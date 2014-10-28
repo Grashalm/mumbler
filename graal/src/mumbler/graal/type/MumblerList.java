@@ -34,12 +34,12 @@ public class MumblerList {
         return new MumblerList(obj, this);
     }
 
-    public long length() {
+    public int length() {
         if (this == MumblerNull.EMPTY) {
             return 0;
         }
 
-        long len = 1;
+        int len = 1;
         MumblerList l = this.cdr;
         while (l != MumblerNull.EMPTY) {
             len++;

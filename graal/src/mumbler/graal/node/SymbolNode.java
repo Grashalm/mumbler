@@ -8,7 +8,7 @@ import com.oracle.truffle.api.frame.VirtualFrame;
 
 @NodeField(name = "slot", type = FrameSlot.class)
 public abstract class SymbolNode extends MumblerNode {
-    protected abstract FrameSlot getSlot();
+    public abstract FrameSlot getSlot();
 
     @Specialization(rewriteOn = FrameSlotTypeException.class)
     protected long readLong(VirtualFrame virtualFrame)
